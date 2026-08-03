@@ -3,6 +3,9 @@ body, p{
 }
 p{
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    margin-bottom: 5px;
 }
 .body-container, .full-stat-container{
     display: flex;
@@ -21,22 +24,27 @@ p{
 }
 .full-stat-container{
     width: 350px;
-    background-color: white;
+    background-color: rgb(247, 247, 247);
     padding:20px 15px;
     border-radius: 5px;
+    box-shadow:2px 2px 5px rgba(0, 0, 0, 0.15);
 }
 .page-title{
-    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     margin-top:15px;
     margin-bottom:15px;
-    font-size: 23px;
+    font-size: 27px;
 }
 .place-input{
     border-radius: 4px;
-    border: solid 2px rgb(230, 228, 228);
-    height:25px;
+    border: solid 1px rgb(229, 194, 250);
+    height:28px;
     padding-left: 10px;
+    background-color: white;
+}
+.place-input::placeholder{
+    color: rgb(161, 160, 160);
+    font-weight: bold;
 }
 .form-container{
     display: flex;
@@ -44,11 +52,22 @@ p{
     align-items: center;
     justify-content: center;
     column-gap: 10px;
+    margin-bottom: 20px;
 }
 .btn{
     border: none;
     border-radius: 4px;
-    background-color: #3299ee;
-    color:white;
+    background: #85d2ff;
+    background: linear-gradient(
+        140deg, 
+        rgb(75, 117, 141) 0%, 
+        rgb(127, 78, 155) 100%);
+    color:rgb(252, 251, 251);
+    font-weight: bold;
     padding: 8px 15px;
+}
+
+.place-name{
+    font-weight:bold;
+    font-size: 22px;
 }

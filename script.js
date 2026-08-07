@@ -2,9 +2,9 @@ const getWeatherBtn = document.querySelector(".js-btn");
 const inputBar = document.querySelector(".js-input-bar");
 
 const placeName=document.querySelector('.js-place-name');
-const weatherData=document.querySelector('.js-place-name');
-const tempData=document.querySelector('.js-place-name');
-const humidityData=document.querySelector('.js-place-name');
+const weatherData=document.querySelector('.js-weather-stat');
+const tempData=document.querySelector('.js-temp');
+const humidityData=document.querySelector('.js-humidity');
 
 let temp='';
 let humidity='';
@@ -26,14 +26,11 @@ async function getLanLong(place){
   let lat=0;
   let lon=0;
   for (let i=0; i<data.length; i++){
-    console.log(data);
     if (data[i].name === locationName){
       lat = data[i].lat;
       lon = data[i].lon;
     }
   }
-  console.log('lat: ', lat);
-  console.log('lon: ', lon);
 
   getWeatherData(lat, lon);
 
@@ -49,13 +46,15 @@ async function getWeatherData(latitude, longitude){
   temp=data.main.temp;
   humidity=data.main.humidity;
   weather=data.weather[0].main;
-  console.log(data.main.temp)
-  console.log(data.main.humidity)
-  console.log(data.weather[0].main)
+  render();
 }
 
-
-
+function render(){
+  placeName.innerHTML=inputBar.value;
+  weatherData.innerHTML=weather;
+  tempData.innerHTML=temp;
+  humidityData.innerHTML=humidity;
+}
 
 /*
 weather

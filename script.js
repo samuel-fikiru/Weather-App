@@ -50,10 +50,11 @@ async function getWeatherData(latitude, longitude){
 }
 
 function render(){
+  const deg='&deg';
   placeName.innerHTML=inputBar.value;
   weatherData.innerHTML=weather;
-  tempData.innerHTML=temp;
-  humidityData.innerHTML=humidity;
+  tempData.innerHTML=`Temperature : ${temp}${deg}C`;
+  humidityData.innerHTML=`Humidity : ${humidity}%`;
 }
 
 /*

@@ -40,7 +40,7 @@ async function getWeatherData(latitude, longitude) {
 
   temp = data.main.temp;
   humidity = data.main.humidity;
-  weather = data.weather[0].main;
+  weather = data.weather[0].description;
   render();
 }
 
@@ -48,7 +48,7 @@ function render() {
   const deg = "&deg";
   placeName.innerHTML = inputBar.value;
   weatherData.innerHTML = weather;
-  tempData.innerHTML = `Temperature : ${temp}${deg}C`;
+  tempData.innerHTML = `Temperature : ${temp+deg}C`;
   humidityData.innerHTML = `Humidity : ${humidity}%`;
   inputBar.value='';
 }

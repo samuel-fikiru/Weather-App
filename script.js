@@ -27,8 +27,7 @@ async function getLanLong(place) {
     let lon = data[0].lon;
     getWeatherData(lat, lon);
   } catch (error) {
-    errorMsg.style.display='';
-    console.log("Invalid Input");
+    errorMsg.style.display='block';
     errorMsg.innerHTML = `
     Invalid Location,<br> <span class="request-text">please type valid location</span> </
     `;
@@ -48,6 +47,7 @@ async function getWeatherData(latitude, longitude) {
 }
 
 function render() {
+  errorMsg.style.display='none';
   const deg = "&deg";
   placeName.innerHTML = inputBar.value;
   weatherData.innerHTML = weather;

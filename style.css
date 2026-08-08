@@ -76,7 +76,7 @@ body,
   background: #85d2ff;
   background: linear-gradient(140deg, rgb(44, 78, 97) 0%, rgb(62, 27, 82) 100%);
 }
-.place-name {
+.place-name, .error-mesg {
   font-weight: bold;
   font-size: 22px;
 }
@@ -92,5 +92,16 @@ body,
   }
   .btn {
     width: 95%;
+    margin-bottom: 20px;
   }
+}
+.error-mesg{
+    color: rgb(107, 5, 5);
+    line-height: 16px;
+
+}
+.request-text{
+    font-size: 14px;
+    font-weight: 300;
+    color:rgb(145, 143, 143);
 }

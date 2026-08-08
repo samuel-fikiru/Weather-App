@@ -50,6 +50,7 @@ body,
   height: 28px;
   padding-left: 10px;
   background-color: white;
+  min-width: 120px;
 }
 .place-input::placeholder {
   color: rgb(161, 160, 160);

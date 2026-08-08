@@ -48,7 +48,7 @@ function render() {
   const deg = "&deg";
   placeName.innerHTML = inputBar.value;
   weatherData.innerHTML = weather;
-  tempData.innerHTML = `Temperature : ${temp+deg}C`;
+  tempData.innerHTML = `Temperature : ${temp + deg}C`;
   humidityData.innerHTML = `Humidity : ${humidity}%`;
-  inputBar.value='';
+  inputBar.value = "";
 }

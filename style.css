@@ -54,6 +54,9 @@ body,
   background-color: white;
   min-width: 120px;
 }
+.input-bar:active {
+  outline-width: 1px;
+}
 .place-input::placeholder {
   color: rgb(161, 160, 160);
   font-weight: bold;
@@ -66,8 +69,13 @@ body,
   color: rgb(252, 251, 251);
   font-weight: bold;
   padding: 8px 15px;
+  cursor: pointer;
+  transition: background 0.8s ease-in-out;
 }
-
+.btn:hover {
+  background: #85d2ff;
+  background: linear-gradient(140deg, rgb(44, 78, 97) 0%, rgb(62, 27, 82) 100%);
+}
 .place-name {
   font-weight: bold;
   font-size: 22px;

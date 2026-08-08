@@ -5,6 +5,8 @@ const placeName = document.querySelector(".js-place-name");
 const weatherData = document.querySelector(".js-weather-stat");
 const tempData = document.querySelector(".js-temp");
 const humidityData = document.querySelector(".js-humidity");
+const errorMsg = document.querySelector(".error-mesg");
+
 
 let temp = "";
 let humidity = "";
@@ -20,24 +22,17 @@ async function getLanLong(place) {
   const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${locationName}&limit=5&appid=9667085e726259341ed94d4ecf653338`);
   const data = await response.json();
 
-  try{
+  try {
     let lat = data[0].lat;
     let lon = data[0].lon;
     getWeatherData(lat, lon);
-
-  }catch(error){
-    console.log('Invalid Input');
+  } catch (error) {
+    errorMsg.style.display='';
+    console.log("Invalid Input");
+    errorMsg.innerHTML = `
+    Invalid Location,<br> <span class="request-text">please type valid location</span> </
+    `;
   }
-  
-
-  /*
-  for (let i = 0; i < data.length; i++) {
-    if (data[i].name === locationName) {
-      lat = data[i].lat;
-      lon = data[i].lon;
-    }
-  }
-  */
 }
 
 async function getWeatherData(latitude, longitude) {
@@ -61,11 +56,13 @@ function render() {
   inputBar.value = "";
 }
 
-const test = fetch(`http://api.openweathermap.org/geo/1.0/direct?q=hggchgf&limit=5&appid=9667085e726259341ed94d4ecf653338`).then((response) => {
-  response.json();
-})
-.then((data) => {
-  console.log(data.main)
-}).catch((error) => {
-  console.log('Not Working')
-} );
+const test = fetch(`http://api.openweathermap.org/geo/1.0/direct?q=hggchgf&limit=5&appid=9667085e726259341ed94d4ecf653338`)
+  .then((response) => {
+    response.json();
+  })
+  .then((data) => {
+    console.log(data.main);
+  })
+  .catch((error) => {
+    console.log("Not Working");
+  });

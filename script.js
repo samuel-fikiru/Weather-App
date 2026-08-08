@@ -20,16 +20,24 @@ async function getLanLong(place) {
   const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${locationName}&limit=5&appid=9667085e726259341ed94d4ecf653338`);
   const data = await response.json();
 
-  let lat = 0;
-  let lon = 0;
+  try{
+    let lat = data[0].lat;
+    let lon = data[0].lon;
+    getWeatherData(lat, lon);
+
+  }catch(error){
+    console.log('Invalid Input');
+  }
+  
+
+  /*
   for (let i = 0; i < data.length; i++) {
     if (data[i].name === locationName) {
       lat = data[i].lat;
       lon = data[i].lon;
     }
   }
-
-  getWeatherData(lat, lon);
+  */
 }
 
 async function getWeatherData(latitude, longitude) {
@@ -52,3 +60,12 @@ function render() {
   humidityData.innerHTML = `Humidity : ${humidity}%`;
   inputBar.value = "";
 }
+
+const test = fetch(`http://api.openweathermap.org/geo/1.0/direct?q=hggchgf&limit=5&appid=9667085e726259341ed94d4ecf653338`).then((response) => {
+  response.json();
+})
+.then((data) => {
+  console.log(data.main)
+}).catch((error) => {
+  console.log('Not Working')
+} );

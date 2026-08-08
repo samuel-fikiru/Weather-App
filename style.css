@@ -70,7 +70,7 @@ body,
   font-weight: bold;
   padding: 8px 15px;
   cursor: pointer;
-  transition: background 0.8s ease-in-out;
+  transition: background 3s ease;
 }
 .btn:hover {
   background: #85d2ff;

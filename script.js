@@ -6,12 +6,16 @@ const weatherData = document.querySelector(".js-weather-stat");
 const tempData = document.querySelector(".js-temp");
 const humidityData = document.querySelector(".js-humidity");
 const errorMsg = document.querySelector(".error-mesg");
+const loadingMsg = document.querySelector(".js-loading-mesg");
+
 
 let temp = "";
 let humidity = "";
 let weather = "";
 
+loadingMsg.style.display='none';
 getWeatherBtn.addEventListener("click", (e) => {
+  loadingMsg.style.display='block';
   const inputData = inputBar.value;
   getLanLong(inputData);
 });
@@ -47,6 +51,8 @@ async function getWeatherData(latitude, longitude) {
 
 function render() {
   errorMsg.style.display = "none";
+  loadingMsg.style.display='none';
+
   const deg = "&deg";
   placeName.innerHTML = inputBar.value;
   weatherData.innerHTML = weather;

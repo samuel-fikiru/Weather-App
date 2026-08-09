@@ -108,4 +108,5 @@ body,
 .loading-mesg{
   color: rgba(69, 36, 99, 0.4);
   font-weight: 600;
+  display: none;
 }

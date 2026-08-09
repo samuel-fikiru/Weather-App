@@ -8,18 +8,18 @@ const humidityData = document.querySelector(".js-humidity");
 const errorMsg = document.querySelector(".error-mesg");
 const loadingMsg = document.querySelector(".js-loading-mesg");
 
-const weatherStatContainer = document.querySelector('.js-weather-stat-container');
-
-
+const weatherStatContainer = document.querySelector(".js-weather-stat-container");
 
 let temp = "";
 let humidity = "";
 let weather = "";
 
-loadingMsg.style.display='none';
+loadingMsg.style.display = "none";
 getWeatherBtn.addEventListener("click", (e) => {
-  weatherStatContainer.style.display='none';
-  loadingMsg.style.display='block';
+  weatherStatContainer.style.display = "none";
+  errorMsg.style.display = "none";
+
+  loadingMsg.style.display = "block";
   const inputData = inputBar.value;
   getLanLong(inputData);
 });
@@ -35,6 +35,7 @@ async function getLanLong(place) {
     getWeatherData(lat, lon);
   } catch (error) {
     errorMsg.style.display = "block";
+    loadingMsg.style.display = "none";
     errorMsg.innerHTML = `
     Invalid Location,<br> <span class="request-text">please type valid location</span> </
     `;
@@ -55,15 +56,14 @@ async function getWeatherData(latitude, longitude) {
 
 function render() {
   errorMsg.style.display = "none";
-  loadingMsg.style.display='none';
-  
+  loadingMsg.style.display = "none";
 
   const deg = "&deg";
   placeName.innerHTML = inputBar.value;
   weatherData.innerHTML = weather;
   tempData.innerHTML = `Temperature : ${temp + deg}C`;
   humidityData.innerHTML = `Humidity : ${humidity}%`;
-  weatherStatContainer.style.display='block';
+  weatherStatContainer.style.display = "block";
   inputBar.value = "";
 }
 

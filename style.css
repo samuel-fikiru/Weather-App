@@ -23,7 +23,7 @@ body,
   width: 50%;
   max-width: 400px;
   background-color: rgb(247, 247, 247);
-  padding: 20px 15px;
+  padding: 20px 20px 15px;
   border-radius: 8px;
   box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);
   margin-top: -80px;
@@ -31,7 +31,7 @@ body,
 .page-title {
   font-weight: bold;
   margin-top: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   font-size: 27px;
 }
 .form-container {
@@ -109,4 +109,22 @@ body,
   color: rgba(69, 36, 99, 0.4);
   font-weight: 600;
   display: none;
+  margin-bottom: 5px;
+}
+hr{
+  width: 20px;
+  border-width: 5px 0px 0px;
+  border-style:dotted;
+}
+.bars{
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-bottom: 10px;
+}
+.bar{
+  width: 10px;
+  background-color: rgba(61, 59, 59, 0.2);
+  height:3px;
+  border-radius: 5px;
 }

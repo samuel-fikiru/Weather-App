@@ -15,14 +15,27 @@ let humidity = "";
 let weather = "";
 
 loadingMsg.style.display = "none";
-getWeatherBtn.addEventListener("click", (e) => {
-  weatherStatContainer.style.display = "none";
-  errorMsg.style.display = "none";
 
-  loadingMsg.style.display = "block";
+getWeatherBtn.addEventListener("click", (e) => {
+  InputDisplayControl();
   const inputData = inputBar.value;
   getLanLong(inputData);
 });
+
+
+inputBar.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    InputDisplayControl();
+    const inputData = inputBar.value;
+    getLanLong(inputData);
+  }
+});
+
+function InputDisplayControl(){
+    weatherStatContainer.style.display = "none";
+    errorMsg.style.display = "none";
+    loadingMsg.style.display = "block";
+}
 
 async function getLanLong(place) {
   const locationName = place;

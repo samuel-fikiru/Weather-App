@@ -7,7 +7,6 @@ const tempData = document.querySelector(".js-temp");
 const humidityData = document.querySelector(".js-humidity");
 const errorMsg = document.querySelector(".error-mesg");
 
-
 let temp = "";
 let humidity = "";
 let weather = "";
@@ -19,15 +18,15 @@ getWeatherBtn.addEventListener("click", (e) => {
 
 async function getLanLong(place) {
   const locationName = place;
-  const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${locationName}&limit=5&appid=9667085e726259341ed94d4ecf653338`);
-  const data = await response.json();
-
   try {
+    const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${locationName}&limit=5&appid=9667085e726259341ed94d4ecf653338`);
+    const data = await response.json();
+
     let lat = data[0].lat;
     let lon = data[0].lon;
     getWeatherData(lat, lon);
   } catch (error) {
-    errorMsg.style.display='block';
+    errorMsg.style.display = "block";
     errorMsg.innerHTML = `
     Invalid Location,<br> <span class="request-text">please type valid location</span> </
     `;
@@ -47,7 +46,7 @@ async function getWeatherData(latitude, longitude) {
 }
 
 function render() {
-  errorMsg.style.display='none';
+  errorMsg.style.display = "none";
   const deg = "&deg";
   placeName.innerHTML = inputBar.value;
   weatherData.innerHTML = weather;

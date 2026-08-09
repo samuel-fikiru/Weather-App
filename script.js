@@ -13,6 +13,7 @@ const weatherStatContainer = document.querySelector(".js-weather-stat-container"
 let temp = "";
 let humidity = "";
 let weather = "";
+let locationName = '';
 
 loadingMsg.style.display = "none";
 
@@ -64,6 +65,7 @@ async function getWeatherData(latitude, longitude) {
   temp = data.main.temp;
   humidity = data.main.humidity;
   weather = data.weather[0].description;
+  locationName = data.name;
   render();
 }
 
@@ -72,7 +74,7 @@ function render() {
   loadingMsg.style.display = "none";
 
   const deg = "&deg";
-  placeName.innerHTML = inputBar.value;
+  placeName.innerHTML = locationName;
   weatherData.innerHTML = weather;
   tempData.innerHTML = `Temperature : ${temp + deg}C`;
   humidityData.innerHTML = `Humidity : ${humidity}%`;

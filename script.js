@@ -8,6 +8,9 @@ const humidityData = document.querySelector(".js-humidity");
 const errorMsg = document.querySelector(".error-mesg");
 const loadingMsg = document.querySelector(".js-loading-mesg");
 
+const weatherStatContainer = document.querySelector('.js-weather-stat-container');
+
+
 
 let temp = "";
 let humidity = "";
@@ -15,6 +18,7 @@ let weather = "";
 
 loadingMsg.style.display='none';
 getWeatherBtn.addEventListener("click", (e) => {
+  weatherStatContainer.style.display='none';
   loadingMsg.style.display='block';
   const inputData = inputBar.value;
   getLanLong(inputData);
@@ -52,15 +56,18 @@ async function getWeatherData(latitude, longitude) {
 function render() {
   errorMsg.style.display = "none";
   loadingMsg.style.display='none';
+  
 
   const deg = "&deg";
   placeName.innerHTML = inputBar.value;
   weatherData.innerHTML = weather;
   tempData.innerHTML = `Temperature : ${temp + deg}C`;
   humidityData.innerHTML = `Humidity : ${humidity}%`;
+  weatherStatContainer.style.display='block';
   inputBar.value = "";
 }
 
+/*
 const test = fetch(`http://api.openweathermap.org/geo/1.0/direct?q=hggchgf&limit=5&appid=9667085e726259341ed94d4ecf653338`)
   .then((response) => {
     response.json();
@@ -71,3 +78,5 @@ const test = fetch(`http://api.openweathermap.org/geo/1.0/direct?q=hggchgf&limit
   .catch((error) => {
     console.log("Not Working");
   });
+
+  */

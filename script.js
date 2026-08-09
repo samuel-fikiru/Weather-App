@@ -8,6 +8,7 @@ const humidityData = document.querySelector(".js-humidity");
 const errorMsg = document.querySelector(".error-mesg");
 const loadingMsg = document.querySelector(".js-loading-mesg");
 
+const weatherBoxContainer = document.querySelector(".full-stat-container");
 const weatherStatContainer = document.querySelector(".js-weather-stat-container");
 
 let temp = "";
@@ -66,9 +67,11 @@ function handleCountryCode(data) {
     console.log(res.country);
     const countryCodeBtn = document.createElement('button');
     countryCodeBtn.className='countryCodeBtn';
-    countryCodeBtn.innerHTML=res.countryCodeBtn;
+    countryCodeBtn.innerHTML=res.country;
     container.appendChild(countryCodeBtn);
   });
+  // weatherBoxContainer.appendChild(conatiner);
+  console.log(container);
 }
 
 async function getWeatherData(latitude, longitude) {

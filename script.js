@@ -20,7 +20,7 @@ loadingMsg.style.display = "none";
 getWeatherBtn.addEventListener("click", (e) => {
   InputDisplayControl();
   const inputData = inputBar.value;
-  getLanLong(inputData);
+  getLanLon(inputData);
 });
 
 
@@ -28,7 +28,7 @@ inputBar.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     InputDisplayControl();
     const inputData = inputBar.value;
-    getLanLong(inputData);
+    getLanLon(inputData);
   }
 });
 
@@ -38,11 +38,17 @@ function InputDisplayControl(){
     loadingMsg.style.display = "block";
 }
 
-async function getLanLong(place) {
+async function getLanLon(place) {
   const locationName = place;
   try {
     const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${locationName}&limit=5&appid=9667085e726259341ed94d4ecf653338`);
     const data = await response.json();
+
+    if (data.length>1){
+      data.forEach(res => {
+        console.log(res.country)
+      })
+    }
 
     let lat = data[0].lat;
     let lon = data[0].lon;

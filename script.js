@@ -13,7 +13,7 @@ const weatherStatContainer = document.querySelector(".js-weather-stat-container"
 let temp = "";
 let humidity = "";
 let weather = "";
-let locationName = '';
+let locationName = "";
 
 loadingMsg.style.display = "none";
 
@@ -23,7 +23,6 @@ getWeatherBtn.addEventListener("click", (e) => {
   getLanLon(inputData);
 });
 
-
 inputBar.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     InputDisplayControl();
@@ -32,10 +31,10 @@ inputBar.addEventListener("keydown", (event) => {
   }
 });
 
-function InputDisplayControl(){
-    weatherStatContainer.style.display = "none";
-    errorMsg.style.display = "none";
-    loadingMsg.style.display = "block";
+function InputDisplayControl() {
+  weatherStatContainer.style.display = "none";
+  errorMsg.style.display = "none";
+  loadingMsg.style.display = "block";
 }
 
 async function getLanLon(place) {
@@ -44,10 +43,8 @@ async function getLanLon(place) {
     const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${locationName}&limit=5&appid=9667085e726259341ed94d4ecf653338`);
     const data = await response.json();
 
-    if (data.length>1){
-      data.forEach(res => {
-        console.log(res.country)
-      })
+    if (data.length > 1) {
+      handleCountryCode(data);
     }
 
     let lat = data[0].lat;
@@ -60,6 +57,18 @@ async function getLanLon(place) {
     Invalid Location,<br> <span class="request-text">please type valid location</span> </
     `;
   }
+}
+
+function handleCountryCode(data) {
+  const container = document.createElement('div');
+  container.className='Country-options-container';
+  data.forEach((res) => {
+    console.log(res.country);
+    const countryCodeBtn = document.createElement('button');
+    countryCodeBtn.className='countryCodeBtn';
+    countryCodeBtn.innerHTML=res.countryCodeBtn;
+    container.appendChild(countryCodeBtn);
+  });
 }
 
 async function getWeatherData(latitude, longitude) {

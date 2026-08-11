@@ -5,6 +5,8 @@ const placeName = document.querySelector(".js-place-name");
 const weatherData = document.querySelector(".js-weather-stat");
 const tempData = document.querySelector(".js-temp");
 const humidityData = document.querySelector(".js-humidity");
+const countryCodeData = document.querySelector(".country-code");
+
 const errorMsg = document.querySelector(".error-mesg");
 const loadingMsg = document.querySelector(".js-loading-mesg");
 
@@ -15,6 +17,7 @@ let temp = "";
 let humidity = "";
 let weather = "";
 let locationName = "";
+let countryCode = '';
 
 loadingMsg.style.display = "none";
 
@@ -46,11 +49,11 @@ async function getLanLon(place) {
 
     if (data.length > 1) {
       handleCountryCode(data);
+    } else {
+      let lat = data[0].lat;
+      let lon = data[0].lon;
+      getWeatherData(lat, lon);
     }
-
-    let lat = data[0].lat;
-    let lon = data[0].lon;
-    getWeatherData(lat, lon);
   } catch (error) {
     errorMsg.style.display = "block";
     loadingMsg.style.display = "none";
@@ -61,14 +64,15 @@ async function getLanLon(place) {
 }
 
 function handleCountryCode(data) {
-  const container = document.createElement('div');
-  container.className='Country-options-container';
+  const container = document.createElement("div");
+  container.className = "Country-options-container";
   data.forEach((res) => {
     console.log(res.country);
-    const countryCodeBtn = document.createElement('button');
-    countryCodeBtn.className='countryCodeBtn';
-    countryCodeBtn.innerHTML=res.country;
+    const countryCodeBtn = document.createElement("button");
+    countryCodeBtn.className = "countryCodeBtn";
+    countryCodeBtn.innerHTML = res.country;
     container.appendChild(countryCodeBtn);
+    console.log("reached here");
   });
   // weatherBoxContainer.appendChild(conatiner);
   console.log(container);
@@ -80,10 +84,12 @@ async function getWeatherData(latitude, longitude) {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9667085e726259341ed94d4ecf653338`);
   const data = await response.json();
 
+  console.log(data)
   temp = data.main.temp;
   humidity = data.main.humidity;
   weather = data.weather[0].description;
   locationName = data.name;
+  countryCode = data.sys.country;
   render();
 }
 
@@ -96,6 +102,7 @@ function render() {
   weatherData.innerHTML = weather;
   tempData.innerHTML = `Temperature : ${temp + deg}C`;
   humidityData.innerHTML = `Humidity : ${humidity}%`;
+  countryCodeData.innerHTML=`countryCode: ${countryCode}`;
   weatherStatContainer.style.display = "block";
   inputBar.value = "";
 }

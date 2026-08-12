@@ -114,7 +114,8 @@ body,
   color: rgba(69, 36, 99, 0.4);
   font-weight: 600;
   display: none;
-  margin-bottom: 5px;
+  margin-top: 5px;
+  
 }
 hr {
   width: 20px;

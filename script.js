@@ -13,6 +13,8 @@ const loadingMsg = document.querySelector(".js-loading-mesg");
 const weatherBoxContainer = document.querySelector(".full-stat-container");
 const weatherStatContainer = document.querySelector(".js-weather-stat-container");
 
+let countryOptionContainer = null;
+
 let temp = "";
 let humidity = "";
 let weather = "";
@@ -49,7 +51,26 @@ async function getLanLon(place) {
 
     if (data.length > 1) {
       chosenCountry = handleCountryCode(data);
-      console.log(chosenCountry);
+
+      const btnContainer = document.querySelectorAll(".countryCodeBtn");
+      btnContainer.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          // console.log(btn.textContent);
+          let countryCodeChoice = btn.textContent;
+
+          weatherBoxContainer.removeChild(countryOptionContainer);
+          loadingMsg.style.display = "block";
+          countryCodeText.style.display = "none";
+
+          data.forEach((d) => {
+            if (d.country === countryCodeChoice) {
+              let lat = d.lat;
+              let lon = d.lon;
+              getWeatherData(lat, lon);
+            }
+          });
+        });
+      });
     } else {
       let lat = data[0].lat;
       let lon = data[0].lon;
@@ -80,20 +101,7 @@ function handleCountryCode(data) {
   countryCodeText.style.display = "block";
   weatherBoxContainer.appendChild(container);
 
-
-  const btnContainer = document.querySelectorAll(".countryCodeBtn");
-  btnContainer.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      console.log(btn.textContent);
-      let countryCodeChoice = btn.textContent;
-
-      weatherBoxContainer.removeChild(container);
-      loadingMsg.style.display = "block";
-      countryCodeText.style.display = "none";
-    
-      return countryCodeChoice;
-    });
-  });
+  countryOptionContainer = container;
 }
 
 async function getWeatherData(latitude, longitude) {
@@ -102,7 +110,6 @@ async function getWeatherData(latitude, longitude) {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9667085e726259341ed94d4ecf653338`);
   const data = await response.json();
 
-  console.log(data);
   temp = data.main.temp;
   humidity = data.main.humidity;
   weather = data.weather[0].description;

@@ -48,7 +48,8 @@ async function getLanLon(place) {
     const data = await response.json();
 
     if (data.length > 1) {
-      handleCountryCode(data);
+      chosenCountry = handleCountryCode(data);
+      console.log(chosenCountry);
     } else {
       let lat = data[0].lat;
       let lon = data[0].lon;
@@ -64,29 +65,33 @@ async function getLanLon(place) {
 }
 
 const countryCodeText = document.querySelector(".country-code-option");
-countryCodeText.style.display = "none";
 
 function handleCountryCode(data) {
   const container = document.createElement("div");
   container.className = "Country-options-container";
   data.forEach((res) => {
-    console.log(res.country);
+    // console.log(res.country);
     const countryCodeBtn = document.createElement("button");
     countryCodeBtn.className = "countryCodeBtn";
     countryCodeBtn.innerHTML = res.country;
     container.appendChild(countryCodeBtn);
-    console.log("reached here");
   });
   loadingMsg.style.display = "none";
   countryCodeText.style.display = "block";
   weatherBoxContainer.appendChild(container);
 
-  let countryCodeChoice = '';
+
   const btnContainer = document.querySelectorAll(".countryCodeBtn");
   btnContainer.forEach((btn) => {
     btn.addEventListener("click", () => {
       console.log(btn.textContent);
-      countryCodeChoice = btn.textContent;
+      let countryCodeChoice = btn.textContent;
+
+      weatherBoxContainer.removeChild(container);
+      loadingMsg.style.display = "block";
+      countryCodeText.style.display = "none";
+    
+      return countryCodeChoice;
     });
   });
 }

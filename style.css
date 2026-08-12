@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+*{
+  font-family: ubuntu, sans-serif;
+}
+
 body {
   margin: 0;
   height: 100vh;
@@ -6,7 +12,6 @@ body {
 }
 p {
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   margin-bottom: 5px;
   margin: 0;
@@ -76,7 +81,8 @@ body,
   background: #85d2ff;
   background: linear-gradient(140deg, rgb(44, 78, 97) 0%, rgb(62, 27, 82) 100%);
 }
-.place-name, .error-mesg {
+.place-name,
+.error-mesg {
   font-weight: bold;
   font-size: 22px;
 }
@@ -95,36 +101,51 @@ body,
     margin-bottom: 20px;
   }
 }
-.error-mesg{
-    color: rgb(107, 5, 5);
-    line-height: 16px;
-
+.error-mesg {
+  color: rgb(107, 5, 5);
+  line-height: 16px;
 }
-.request-text{
-    font-size: 14px;
-    font-weight: 300;
-    color:rgb(145, 143, 143);
+.request-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgb(145, 143, 143);
 }
-.loading-mesg{
+.loading-mesg {
   color: rgba(69, 36, 99, 0.4);
   font-weight: 600;
   display: none;
   margin-bottom: 5px;
 }
-hr{
+hr {
   width: 20px;
   border-width: 5px 0px 0px;
-  border-style:dotted;
+  border-style: dotted;
 }
-.bars{
+.bars {
   display: flex;
   flex-direction: row;
   gap: 40px;
   margin-bottom: 10px;
 }
-.bar{
+.bar {
   width: 10px;
   background-color: rgba(61, 59, 59, 0.2);
-  height:3px;
+  height: 3px;
   border-radius: 5px;
+}
+
+.countryCodeBtn {
+  margin: 5px 5px;
+  border: none;
+  border-radius: 3px;
+  padding: 3px 10px;
+  color: white;
+  font-weight: bold;
+  background: #85d2ff;
+  background: linear-gradient(140deg, rgb(75, 117, 141) 0%, rgb(127, 78, 155) 100%);
+}
+.country-code-option{
+  margin: 10px 0px 5px;
+  color:rgb(80, 78, 78);
+  font-size: 15px;
 }

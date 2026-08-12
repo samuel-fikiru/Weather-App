@@ -63,6 +63,9 @@ async function getLanLon(place) {
   }
 }
 
+const countryCodeText = document.querySelector('.country-code-option');
+countryCodeText.style.display='none';
+
 function handleCountryCode(data) {
   const container = document.createElement("div");
   container.className = "Country-options-container";
@@ -74,8 +77,9 @@ function handleCountryCode(data) {
     container.appendChild(countryCodeBtn);
     console.log("reached here");
   });
-  // weatherBoxContainer.appendChild(conatiner);
-  console.log(container);
+  loadingMsg.style.display = "none";
+  countryCodeText.style.display='block';
+  weatherBoxContainer.appendChild(container);
 }
 
 async function getWeatherData(latitude, longitude) {

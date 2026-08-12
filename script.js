@@ -17,7 +17,7 @@ let temp = "";
 let humidity = "";
 let weather = "";
 let locationName = "";
-let countryCode = '';
+let countryCode = "";
 
 loadingMsg.style.display = "none";
 
@@ -63,8 +63,8 @@ async function getLanLon(place) {
   }
 }
 
-const countryCodeText = document.querySelector('.country-code-option');
-countryCodeText.style.display='none';
+const countryCodeText = document.querySelector(".country-code-option");
+countryCodeText.style.display = "none";
 
 function handleCountryCode(data) {
   const container = document.createElement("div");
@@ -78,8 +78,17 @@ function handleCountryCode(data) {
     console.log("reached here");
   });
   loadingMsg.style.display = "none";
-  countryCodeText.style.display='block';
+  countryCodeText.style.display = "block";
   weatherBoxContainer.appendChild(container);
+
+  let countryCodeChoice = '';
+  const btnContainer = document.querySelectorAll(".countryCodeBtn");
+  btnContainer.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      console.log(btn.textContent);
+      countryCodeChoice = btn.textContent;
+    });
+  });
 }
 
 async function getWeatherData(latitude, longitude) {
@@ -88,7 +97,7 @@ async function getWeatherData(latitude, longitude) {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9667085e726259341ed94d4ecf653338`);
   const data = await response.json();
 
-  console.log(data)
+  console.log(data);
   temp = data.main.temp;
   humidity = data.main.humidity;
   weather = data.weather[0].description;
@@ -106,7 +115,7 @@ function render() {
   weatherData.innerHTML = weather;
   tempData.innerHTML = `Temperature : ${temp + deg}C`;
   humidityData.innerHTML = `Humidity : ${humidity}%`;
-  countryCodeData.innerHTML=`countryCode: ${countryCode}`;
+  countryCodeData.innerHTML = `countryCode: ${countryCode}`;
   weatherStatContainer.style.display = "block";
   inputBar.value = "";
 }

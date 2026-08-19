@@ -52,6 +52,7 @@ async function getLanLon(place) {
     if (data.length > 1) {
       chosenCountry = handleCountryCode(data);
 
+      
       const btnContainer = document.querySelectorAll(".countryCodeBtn");
       btnContainer.forEach((btn) => {
         btn.addEventListener("click", () => {
@@ -64,6 +65,7 @@ async function getLanLon(place) {
 
           data.forEach((d) => {
             if (d.country === countryCodeChoice) {
+              console.log(d);
               let lat = d.lat;
               let lon = d.lon;
               getWeatherData(lat, lon);
@@ -107,8 +109,10 @@ function handleCountryCode(data) {
 async function getWeatherData(latitude, longitude) {
   const lat = latitude;
   const lon = longitude;
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9667085e726259341ed94d4ecf653338`);
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9667085e726259341ed94d4ecf653338&units=metric`);
   const data = await response.json();
+
+  console.log(data);
 
   temp = data.main.temp;
   humidity = data.main.humidity;
@@ -123,6 +127,7 @@ function render() {
   loadingMsg.style.display = "none";
 
   const deg = "&deg";
+
   placeName.innerHTML = locationName;
   weatherData.innerHTML = weather;
   tempData.innerHTML = `Temperature : ${temp + deg}C`;
@@ -145,3 +150,6 @@ const test = fetch(`http://api.openweathermap.org/geo/1.0/direct?q=hggchgf&limit
   });
 
   */
+
+
+//  https://api.openweathermap.org/data/2.5/weather?lat=6.9505&lon=37.8567&appid=9667085e726259341ed94d4ecf653338

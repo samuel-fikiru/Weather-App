@@ -44,15 +44,14 @@ function InputDisplayControl() {
 }
 
 async function getLanLon(place) {
-  const locationName = place;
+  const locationinput = place;
   try {
-    const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${locationName}&limit=5&appid=9667085e726259341ed94d4ecf653338`);
+    const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${locationinput}&limit=5&appid=9667085e726259341ed94d4ecf653338`);
     const data = await response.json();
 
     if (data.length > 1) {
       chosenCountry = handleCountryCode(data);
 
-      
       const btnContainer = document.querySelectorAll(".countryCodeBtn");
       btnContainer.forEach((btn) => {
         btn.addEventListener("click", () => {
@@ -65,17 +64,21 @@ async function getLanLon(place) {
 
           data.forEach((d) => {
             if (d.country === countryCodeChoice) {
-              console.log(d);
               let lat = d.lat;
               let lon = d.lon;
+              console.log(d)
+              locationName = d.name;
+
               getWeatherData(lat, lon);
             }
           });
         });
       });
     } else {
+      locationName = data[0].name;
       let lat = data[0].lat;
       let lon = data[0].lon;
+
       getWeatherData(lat, lon);
     }
   } catch (error) {
@@ -117,7 +120,6 @@ async function getWeatherData(latitude, longitude) {
   temp = data.main.temp;
   humidity = data.main.humidity;
   weather = data.weather[0].description;
-  locationName = data.name;
   countryCode = data.sys.country;
   render();
 }
@@ -150,6 +152,5 @@ const test = fetch(`http://api.openweathermap.org/geo/1.0/direct?q=hggchgf&limit
   });
 
   */
-
 
 //  https://api.openweathermap.org/data/2.5/weather?lat=6.9505&lon=37.8567&appid=9667085e726259341ed94d4ecf653338

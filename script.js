@@ -16,7 +16,6 @@ const weatherStatContainer = document.querySelector(".js-weather-stat-container"
 let countrySelectionContainer = null;
 let locationName = "";
 
-
 getWeatherBtn.addEventListener("click", (e) => {
   renderLoadingMsg();
   const inputData = inputBar.value.trim();
@@ -38,9 +37,6 @@ inputBar.addEventListener("keydown", (event) => {
     }
   }
 });
-
-let lat = 0;
-let lon = 0;
 
 async function getLanLon(placeName) {
   const locationinput = placeName;
@@ -68,8 +64,12 @@ async function getLanLon(placeName) {
         }
       });
     } else {
-      assignInfo(data[0]);
-      getWeatherData(lat, lon);
+      if (data.length > 0) {
+        assignInfo(data[0]);
+        getWeatherData(lat, lon);
+      } else {
+        renderErrorMsg("location");
+      }
     }
   } catch (error) {
     if (error.message === "Request failed") {

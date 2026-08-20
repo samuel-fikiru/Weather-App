@@ -145,7 +145,7 @@ hr {
   background: #85d2ff;
   background: linear-gradient(140deg, rgb(75, 117, 141) 0%, rgb(127, 78, 155) 100%);
 }
-.country-code-option {
+.code-preferance-text {
   margin: 10px 0px 5px;
   color: rgb(80, 78, 78);
   font-size: 15px;

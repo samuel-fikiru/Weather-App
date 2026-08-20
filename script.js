@@ -51,8 +51,8 @@ function InputDisplayControl() {
   loadingMsg.style.display = "block";
 }
 
-async function getLanLon(place) {
-  const locationinput = place;
+async function getLanLon(placeName) {
+  const locationinput = placeName;
   try {
     const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${locationinput}&limit=5&appid=9667085e726259341ed94d4ecf653338`);
     if (!response.ok) {
@@ -64,6 +64,28 @@ async function getLanLon(place) {
       handleCountryCode(data);
 
       const btnContainer = document.querySelectorAll(".countryCodeBtn");
+      const BtnsContainer = document.querySelector(".country-options-container");
+      BtnsContainer.addEventListener("click", (event) => {
+        if (event.target.classList.contains("countryCodeBtn")) {
+          let countryCodeChoice = event.target.textContent;
+
+          weatherBoxContainer.removeChild(countryOptionContainer);
+          loadingMsg.style.display = "block";
+          countryCodeText.style.display = "none";
+
+          
+          data.forEach((d) => {
+            if (d.country === countryCodeChoice) {
+              let lat = d.lat;
+              let lon = d.lon;
+              locationName = d.name;
+
+              getWeatherData(lat, lon);
+            }
+          });
+        }
+      });
+      /*
       btnContainer.forEach((btn) => {
         btn.addEventListener("click", () => {
           let countryCodeChoice = btn.textContent;
@@ -83,6 +105,7 @@ async function getLanLon(place) {
           });
         });
       });
+      */
     } else {
       locationName = data[0].name;
       let lat = data[0].lat;
@@ -99,12 +122,12 @@ async function getLanLon(place) {
   }
 }
 
-const countryCodeText = document.querySelector(".country-code-option");
+const countryCodeText = document.querySelector(".code-preferance-text"); // choose country code paragraph
 
 // creates country code options on multiple result
 function handleCountryCode(data) {
   const container = document.createElement("div");
-  container.className = "Country-options-container";
+  container.className = "country-options-container";
   data.forEach((res) => {
     const countryCodeBtn = document.createElement("button");
     countryCodeBtn.className = "countryCodeBtn";
@@ -141,6 +164,7 @@ async function getWeatherData(latitude, longitude) {
   }
 }
 
+// handles type of error msg to be displayed
 function renderErrorMsg(errorType) {
   if (errorType === "location") {
     errorMsg.innerHTML = `
@@ -152,6 +176,7 @@ function renderErrorMsg(errorType) {
   errorMsg.style.display = "block";
 }
 
+// renders weather stat data
 function render() {
   errorMsg.style.display = "none";
   loadingMsg.style.display = "none";

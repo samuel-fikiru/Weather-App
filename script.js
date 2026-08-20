@@ -55,10 +55,13 @@ async function getLanLon(place) {
   const locationinput = place;
   try {
     const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${locationinput}&limit=5&appid=9667085e726259341ed94d4ecf653338`);
+    if (!response.ok) {
+      throw new Error("Request failed");
+    }
     const data = await response.json();
 
     if (data.length > 1) {
-      chosenCountry = handleCountryCode(data);
+      handleCountryCode(data);
 
       const btnContainer = document.querySelectorAll(".countryCodeBtn");
       btnContainer.forEach((btn) => {
@@ -88,12 +91,17 @@ async function getLanLon(place) {
       getWeatherData(lat, lon);
     }
   } catch (error) {
-    renderErrorMsg("location");
+    if (error.message === "Request failed") {
+      renderErrorMsg("request");
+    } else {
+      renderErrorMsg("location");
+    }
   }
 }
 
 const countryCodeText = document.querySelector(".country-code-option");
 
+// creates country code options on multiple result
 function handleCountryCode(data) {
   const container = document.createElement("div");
   container.className = "Country-options-container";

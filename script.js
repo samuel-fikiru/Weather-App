@@ -80,10 +80,7 @@ async function getLanLon(place) {
       getWeatherData(lat, lon);
     }
   } catch (error) {
-    errorMsg.style.display = "block";
-    loadingMsg.style.display = "none";
-    errorMsg.innerHTML = `
-    Invalid Location,<br> <span class="request-text">please type valid location</span>`;
+    renderErrorMsg('location');
   }
 }
 
@@ -124,10 +121,19 @@ async function getWeatherData(latitude, longitude) {
       render();
     }
   } catch (error) {
-    loadingMsg.style.display = "none";
-    errorMsg.innerHTML = `Request Failed,<br> <span class="request-text">please try again</span>`;
-    errorMsg.style.display = "block";
+    renderErrorMsg('request');
   }
+}
+
+function renderErrorMsg(errorType) {
+  if (errorType === "location") {
+    errorMsg.innerHTML = `
+    Invalid Location,<br> <span class="request-text">please type valid location</span>`;
+  } else if (errorType === "request") {
+    errorMsg.innerHTML = `Request Failed,<br> <span class="request-text">please try again</span>`;
+  }
+  loadingMsg.style.display = "none";
+  errorMsg.style.display = "block";
 }
 
 function render() {

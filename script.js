@@ -38,6 +38,13 @@ inputBar.addEventListener("keydown", (event) => {
   }
 });
 
+inputBar.addEventListener("input", () => {
+  const BtnsContainer = document.querySelector(".countrySelectionContainer");
+  BtnsContainer.innerHTML = "";
+  renderLoadingMsg();
+  loadingMsg.style.display = "none";
+});
+
 async function getLanLon(placeName) {
   const locationinput = placeName;
   try {
@@ -64,11 +71,11 @@ async function getLanLon(placeName) {
         }
       });
     } else {
-      if (data.length > 0) {
+      if (data.length === 0) {
+        renderErrorMsg("location");
+      } else {
         assignInfo(data[0]);
         getWeatherData(lat, lon);
-      } else {
-        renderErrorMsg("location");
       }
     }
   } catch (error) {
@@ -118,6 +125,7 @@ async function getWeatherData(latitude, longitude) {
       throw new Error("Request Failed!");
     } else {
       const data = await response.json();
+      renderLoadingMsg();
       render(data);
     }
   } catch (error) {

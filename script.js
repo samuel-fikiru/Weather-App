@@ -51,6 +51,9 @@ function InputDisplayControl() {
   loadingMsg.style.display = "block";
 }
 
+let lat = 0;
+let lon = 0;
+
 async function getLanLon(placeName) {
   const locationinput = placeName;
   try {
@@ -73,43 +76,15 @@ async function getLanLon(placeName) {
           loadingMsg.style.display = "block";
           countryCodeText.style.display = "none";
 
-          
-          data.forEach((d) => {
-            if (d.country === countryCodeChoice) {
-              let lat = d.lat;
-              let lon = d.lon;
-              locationName = d.name;
+          const filteredCountry = data.filter((c) => c.country === countryCodeChoice)[0];
+          console.log(filteredCountry);
+          assignInfo(filteredCountry);
 
-              getWeatherData(lat, lon);
-            }
-          });
+          getWeatherData(lat, lon);
         }
       });
-      /*
-      btnContainer.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          let countryCodeChoice = btn.textContent;
-
-          weatherBoxContainer.removeChild(countryOptionContainer);
-          loadingMsg.style.display = "block";
-          countryCodeText.style.display = "none";
-
-          data.forEach((d) => {
-            if (d.country === countryCodeChoice) {
-              let lat = d.lat;
-              let lon = d.lon;
-              locationName = d.name;
-
-              getWeatherData(lat, lon);
-            }
-          });
-        });
-      });
-      */
     } else {
-      locationName = data[0].name;
-      let lat = data[0].lat;
-      let lon = data[0].lon;
+      assignInfo(data[0]);
 
       getWeatherData(lat, lon);
     }
@@ -120,6 +95,12 @@ async function getLanLon(placeName) {
       renderErrorMsg("location");
     }
   }
+}
+
+function assignInfo(data) {
+  locationName = data.name;
+  lat = data.lat;
+  lon = data.lon;
 }
 
 const countryCodeText = document.querySelector(".code-preferance-text"); // choose country code paragraph

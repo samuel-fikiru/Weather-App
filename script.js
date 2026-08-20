@@ -55,7 +55,6 @@ async function getLanLon(place) {
       const btnContainer = document.querySelectorAll(".countryCodeBtn");
       btnContainer.forEach((btn) => {
         btn.addEventListener("click", () => {
-          // console.log(btn.textContent);
           let countryCodeChoice = btn.textContent;
 
           weatherBoxContainer.removeChild(countryOptionContainer);
@@ -66,7 +65,6 @@ async function getLanLon(place) {
             if (d.country === countryCodeChoice) {
               let lat = d.lat;
               let lon = d.lon;
-              console.log(d)
               locationName = d.name;
 
               getWeatherData(lat, lon);
@@ -85,8 +83,7 @@ async function getLanLon(place) {
     errorMsg.style.display = "block";
     loadingMsg.style.display = "none";
     errorMsg.innerHTML = `
-    Invalid Location,<br> <span class="request-text">please type valid location</span> </
-    `;
+    Invalid Location,<br> <span class="request-text">please type valid location</span>`;
   }
 }
 
@@ -96,7 +93,6 @@ function handleCountryCode(data) {
   const container = document.createElement("div");
   container.className = "Country-options-container";
   data.forEach((res) => {
-    // console.log(res.country);
     const countryCodeBtn = document.createElement("button");
     countryCodeBtn.className = "countryCodeBtn";
     countryCodeBtn.innerHTML = res.country;
@@ -109,19 +105,29 @@ function handleCountryCode(data) {
   countryOptionContainer = container;
 }
 
+// handles weather data request using lat and lon from getLanLon
 async function getWeatherData(latitude, longitude) {
   const lat = latitude;
   const lon = longitude;
-  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9667085e726259341ed94d4ecf653338&units=metric`);
-  const data = await response.json();
 
-  console.log(data);
+  try {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9667085e726259341ed94d4ecf653338&units=metric`);
+    if (!response.ok) {
+      throw new Error("Request Failed!");
+    } else {
+      const data = await response.json();
 
-  temp = data.main.temp;
-  humidity = data.main.humidity;
-  weather = data.weather[0].description;
-  countryCode = data.sys.country;
-  render();
+      temp = data.main.temp;
+      humidity = data.main.humidity;
+      weather = data.weather[0].description;
+      countryCode = data.sys.country;
+      render();
+    }
+  } catch (error) {
+    loadingMsg.style.display = "none";
+    errorMsg.innerHTML = `Request Failed,<br> <span class="request-text">please try again</span>`;
+    errorMsg.style.display = "block";
+  }
 }
 
 function render() {
@@ -138,19 +144,3 @@ function render() {
   weatherStatContainer.style.display = "block";
   inputBar.value = "";
 }
-
-/*
-const test = fetch(`http://api.openweathermap.org/geo/1.0/direct?q=hggchgf&limit=5&appid=9667085e726259341ed94d4ecf653338`)
-  .then((response) => {
-    response.json();
-  })
-  .then((data) => {
-    console.log(data.main);
-  })
-  .catch((error) => {
-    console.log("Not Working");
-  });
-
-  */
-
-//  https://api.openweathermap.org/data/2.5/weather?lat=6.9505&lon=37.8567&appid=9667085e726259341ed94d4ecf653338

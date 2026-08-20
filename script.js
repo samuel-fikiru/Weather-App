@@ -13,7 +13,7 @@ const loadingMsg = document.querySelector(".js-loading-mesg");
 const weatherBoxContainer = document.querySelector(".full-stat-container");
 const weatherStatContainer = document.querySelector(".js-weather-stat-container");
 
-let countryOptionContainer = null;
+let countrySelectionContainer = null;
 
 let temp = "";
 let humidity = "";
@@ -45,8 +45,6 @@ inputBar.addEventListener("keydown", (event) => {
   }
 });
 
-
-
 let lat = 0;
 let lon = 0;
 
@@ -62,25 +60,22 @@ async function getLanLon(placeName) {
     if (data.length > 1) {
       handleCountryCode(data);
 
-      const btnContainer = document.querySelectorAll(".countryCodeBtn");
-      const BtnsContainer = document.querySelector(".country-options-container");
-      BtnsContainer.addEventListener("click", (event) => {
+      const BtnsContainer = document.querySelector(".countrySelectionContainer");
+      BtnsContainer.addEventListener("click", (event) => { 
+        // adds event listener to the container instead of each btns
         if (event.target.classList.contains("countryCodeBtn")) {
-          let countryCodeChoice = event.target.textContent;
+          let selectedCountryCode = event.target.textContent;
 
-          weatherBoxContainer.removeChild(countryOptionContainer);
+          weatherBoxContainer.removeChild(countrySelectionContainer);
           renderLoadingMsg();
 
-          const filteredCountry = data.filter((c) => c.country === countryCodeChoice)[0];
-          console.log(filteredCountry);
+          const filteredCountry = data.filter((c) => c.country === selectedCountryCode)[0];
           assignInfo(filteredCountry);
-
           getWeatherData(lat, lon);
         }
       });
     } else {
       assignInfo(data[0]);
-
       getWeatherData(lat, lon);
     }
   } catch (error) {
@@ -92,6 +87,7 @@ async function getLanLon(placeName) {
   }
 }
 
+// assings lat, lon and placename fromm selected country data
 function assignInfo(data) {
   locationName = data.name;
   lat = data.lat;
@@ -103,7 +99,7 @@ const countryCodeText = document.querySelector(".code-preferance-text"); // choo
 // creates country code options on multiple result
 function handleCountryCode(data) {
   const container = document.createElement("div");
-  container.className = "country-options-container";
+  container.className = "countrySelectionContainer";
   data.forEach((res) => {
     const countryCodeBtn = document.createElement("button");
     countryCodeBtn.className = "countryCodeBtn";
@@ -114,7 +110,7 @@ function handleCountryCode(data) {
   countryCodeText.style.display = "block";
   weatherBoxContainer.appendChild(container);
 
-  countryOptionContainer = container;
+  countrySelectionContainer = container;
 }
 
 // handles weather data request using lat and lon from getLanLon
@@ -152,6 +148,7 @@ function renderErrorMsg(errorType) {
   errorMsg.style.display = "block";
 }
 
+// handles displaying loading message
 function renderLoadingMsg() {
   loadingMsg.style.display = "block";
   countryCodeText.style.display = "none";

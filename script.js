@@ -25,15 +25,23 @@ loadingMsg.style.display = "none";
 
 getWeatherBtn.addEventListener("click", (e) => {
   InputDisplayControl();
-  const inputData = inputBar.value;
-  getLanLon(inputData);
+  const inputData = inputBar.value.trim();
+  if (inputData !== "") {
+    getLanLon(inputData);
+  } else {
+    renderErrorMsg("location");
+  }
 });
 
 inputBar.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     InputDisplayControl();
-    const inputData = inputBar.value;
-    getLanLon(inputData);
+    const inputData = inputBar.value.trim();
+    if (inputData !== "") {
+      getLanLon(inputData);
+    } else {
+      renderErrorMsg("location");
+    }
   }
 });
 
@@ -80,7 +88,7 @@ async function getLanLon(place) {
       getWeatherData(lat, lon);
     }
   } catch (error) {
-    renderErrorMsg('location');
+    renderErrorMsg("location");
   }
 }
 
@@ -121,7 +129,7 @@ async function getWeatherData(latitude, longitude) {
       render();
     }
   } catch (error) {
-    renderErrorMsg('request');
+    renderErrorMsg("request");
   }
 }
 

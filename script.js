@@ -14,14 +14,8 @@ const weatherBoxContainer = document.querySelector(".full-stat-container");
 const weatherStatContainer = document.querySelector(".js-weather-stat-container");
 
 let countrySelectionContainer = null;
-
-let temp = "";
-let humidity = "";
-let weather = "";
 let locationName = "";
-let countryCode = "";
 
-loadingMsg.style.display = "none";
 
 getWeatherBtn.addEventListener("click", (e) => {
   renderLoadingMsg();
@@ -61,7 +55,7 @@ async function getLanLon(placeName) {
       handleCountryCode(data);
 
       const BtnsContainer = document.querySelector(".countrySelectionContainer");
-      BtnsContainer.addEventListener("click", (event) => { 
+      BtnsContainer.addEventListener("click", (event) => {
         // adds event listener to the container instead of each btns
         if (event.target.classList.contains("countryCodeBtn")) {
           let selectedCountryCode = event.target.textContent;
@@ -71,7 +65,6 @@ async function getLanLon(placeName) {
 
           const filteredCountry = data.filter((c) => c.country === selectedCountryCode)[0];
           assignInfo(filteredCountry);
-          getWeatherData(lat, lon);
         }
       });
     } else {
@@ -90,8 +83,9 @@ async function getLanLon(placeName) {
 // assings lat, lon and placename fromm selected country data
 function assignInfo(data) {
   locationName = data.name;
-  lat = data.lat;
-  lon = data.lon;
+  const lat = data.lat;
+  const lon = data.lon;
+  getWeatherData(lat, lon);
 }
 
 const countryCodeText = document.querySelector(".code-preferance-text"); // choose country code paragraph
@@ -103,7 +97,7 @@ function handleCountryCode(data) {
   data.forEach((res) => {
     const countryCodeBtn = document.createElement("button");
     countryCodeBtn.className = "countryCodeBtn";
-    countryCodeBtn.innerHTML = res.country;
+    countryCodeBtn.textContent = res.country;
     container.appendChild(countryCodeBtn);
   });
   loadingMsg.style.display = "none";
@@ -124,12 +118,7 @@ async function getWeatherData(latitude, longitude) {
       throw new Error("Request Failed!");
     } else {
       const data = await response.json();
-
-      temp = data.main.temp;
-      humidity = data.main.humidity;
-      weather = data.weather[0].description;
-      countryCode = data.sys.country;
-      render();
+      render(data);
     }
   } catch (error) {
     renderErrorMsg("request");
@@ -157,17 +146,22 @@ function renderLoadingMsg() {
 }
 
 // renders weather stat data
-function render() {
+function render(data) {
+  const temp = data.main.temp;
+  const humidity = data.main.humidity;
+  const weather = data.weather[0].description;
+  const countryCode = data.sys.country;
+
   errorMsg.style.display = "none";
   loadingMsg.style.display = "none";
 
   const deg = "&deg";
 
-  placeName.innerHTML = locationName;
-  weatherData.innerHTML = weather;
-  tempData.innerHTML = `Temperature : ${temp + deg}C`;
-  humidityData.innerHTML = `Humidity : ${humidity}%`;
-  countryCodeData.innerHTML = `countryCode: ${countryCode}`;
+  placeName.textContent = locationName;
+  weatherData.textContent = weather;
+  tempData.textContent = `Temperature : ${temp + deg}C`;
+  humidityData.textContent = `Humidity : ${humidity}%`;
+  countryCodeData.textContent = `countryCode: ${countryCode}`;
   weatherStatContainer.style.display = "block";
   inputBar.value = "";
 }

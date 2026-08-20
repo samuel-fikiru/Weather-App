@@ -24,7 +24,7 @@ let countryCode = "";
 loadingMsg.style.display = "none";
 
 getWeatherBtn.addEventListener("click", (e) => {
-  InputDisplayControl();
+  renderLoadingMsg();
   const inputData = inputBar.value.trim();
   if (inputData !== "") {
     getLanLon(inputData);
@@ -35,7 +35,7 @@ getWeatherBtn.addEventListener("click", (e) => {
 
 inputBar.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
-    InputDisplayControl();
+    renderLoadingMsg();
     const inputData = inputBar.value.trim();
     if (inputData !== "") {
       getLanLon(inputData);
@@ -45,11 +45,7 @@ inputBar.addEventListener("keydown", (event) => {
   }
 });
 
-function InputDisplayControl() {
-  weatherStatContainer.style.display = "none";
-  errorMsg.style.display = "none";
-  loadingMsg.style.display = "block";
-}
+
 
 let lat = 0;
 let lon = 0;
@@ -73,8 +69,7 @@ async function getLanLon(placeName) {
           let countryCodeChoice = event.target.textContent;
 
           weatherBoxContainer.removeChild(countryOptionContainer);
-          loadingMsg.style.display = "block";
-          countryCodeText.style.display = "none";
+          renderLoadingMsg();
 
           const filteredCountry = data.filter((c) => c.country === countryCodeChoice)[0];
           console.log(filteredCountry);
@@ -155,6 +150,13 @@ function renderErrorMsg(errorType) {
   }
   loadingMsg.style.display = "none";
   errorMsg.style.display = "block";
+}
+
+function renderLoadingMsg() {
+  loadingMsg.style.display = "block";
+  countryCodeText.style.display = "none";
+  weatherStatContainer.style.display = "none";
+  errorMsg.style.display = "none";
 }
 
 // renders weather stat data

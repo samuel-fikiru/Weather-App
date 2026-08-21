@@ -38,12 +38,20 @@ inputBar.addEventListener("keydown", (event) => {
   }
 });
 
-inputBar.addEventListener("input", () => {
-  const BtnsContainer = document.querySelector(".countrySelectionContainer");
-  BtnsContainer.innerHTML = "";
+function inputEventLisener() {
+  inputBar.addEventListener("input", () => {
+    console.log(inputBar.value);
+    clearInterface();
+  });
+}
+
+function clearInterface() {
+  if (weatherBoxContainer.contains(countrySelectionContainer)) {
+    weatherBoxContainer.removeChild(countrySelectionContainer);
+  }
   renderLoadingMsg();
   loadingMsg.style.display = "none";
-});
+}
 
 async function getLanLon(placeName) {
   const locationinput = placeName;
@@ -75,7 +83,6 @@ async function getLanLon(placeName) {
         renderErrorMsg("location");
       } else {
         assignInfo(data[0]);
-        getWeatherData(lat, lon);
       }
     }
   } catch (error) {
@@ -85,6 +92,7 @@ async function getLanLon(placeName) {
       renderErrorMsg("location");
     }
   }
+  inputEventLisener();
 }
 
 // assings lat, lon and placename fromm selected country data

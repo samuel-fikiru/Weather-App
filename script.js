@@ -16,7 +16,9 @@ const weatherStatContainer = document.querySelector(".js-weather-stat-container"
 let countrySelectionContainer = null;
 let locationName = "";
 
+// getWeatherBtn click listener 
 getWeatherBtn.addEventListener("click", (e) => {
+  clearInterface();
   renderLoadingMsg();
   const inputData = inputBar.value.trim();
   if (inputData !== "") {
@@ -26,7 +28,9 @@ getWeatherBtn.addEventListener("click", (e) => {
   }
 });
 
+// enter click event listener
 inputBar.addEventListener("keydown", (event) => {
+  clearInterface();
   if (event.key === "Enter") {
     renderLoadingMsg();
     const inputData = inputBar.value.trim();
@@ -38,6 +42,7 @@ inputBar.addEventListener("keydown", (event) => {
   }
 });
 
+// adds input eventlistener on inputBAr
 function inputEventLisener() {
   inputBar.addEventListener("input", () => {
     console.log(inputBar.value);
@@ -45,6 +50,7 @@ function inputEventLisener() {
   });
 }
 
+// clears result , state interface
 function clearInterface() {
   if (weatherBoxContainer.contains(countrySelectionContainer)) {
     weatherBoxContainer.removeChild(countrySelectionContainer);
@@ -171,11 +177,9 @@ function render(data) {
   errorMsg.style.display = "none";
   loadingMsg.style.display = "none";
 
-  const deg = "&deg";
-
   placeName.textContent = locationName;
   weatherData.textContent = weather;
-  tempData.textContent = `Temperature : ${temp + deg}C`;
+  tempData.textContent = `Temperature : ${temp}°C`;
   humidityData.textContent = `Humidity : ${humidity}%`;
   countryCodeData.textContent = `countryCode: ${countryCode}`;
   weatherStatContainer.style.display = "block";

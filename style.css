@@ -13,7 +13,7 @@ body {
   /* background: rgb(91, 193, 252);
   background: linear-gradient(140deg, rgb(91, 193, 252) 0%, rgb(225, 91, 243) 100%);
   */
-  background-image: url("snowy-weather-in-city.jpg");
+  background-image: url("rainy-wallpaper.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -121,14 +121,16 @@ body,
   }
 }
 .error-mesg {
-  color: rgb(66, 37, 37);
+  color: rgb(105, 0, 0);
   line-height: 16px;
+  margin-top: 10px;
   display: none;
 }
 .request-text {
-  font-size: 14px;
+  margin:10px;
+  font-size: 13px;
   font-weight: 300;
-  color: rgb(145, 143, 143);
+  color: rgb(37, 37, 37);
 }
 .loading-mesg {
   color: rgba(255, 255, 255, 0.7);

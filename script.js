@@ -1,4 +1,4 @@
-const getWeatherBtn = document.querySelector(".js-btn");
+const formContainer = document.querySelector(".js-form-container");
 const inputBar = document.querySelector(".js-input-bar");
 
 const placeName = document.querySelector(".js-place-name");
@@ -17,30 +17,19 @@ let countrySelectionContainer = null;
 let locationName = "";
 
 // getWeatherBtn click listener 
-getWeatherBtn.addEventListener("click", (e) => {
+formContainer.addEventListener("submit", (e) => {
+  e.preventDefault();
   clearInterface();
   renderLoadingMsg();
   const inputData = inputBar.value.trim();
   if (inputData !== "") {
     getLanLon(inputData);
+    console.log('running');
   } else {
     renderErrorMsg("location");
   }
 });
 
-// enter click event listener
-inputBar.addEventListener("keydown", (event) => {
-  clearInterface();
-  if (event.key === "Enter") {
-    renderLoadingMsg();
-    const inputData = inputBar.value.trim();
-    if (inputData !== "") {
-      getLanLon(inputData);
-    } else {
-      renderErrorMsg("location");
-    }
-  }
-});
 
 // adds input eventlistener on inputBAr
 function inputEventLisener() {

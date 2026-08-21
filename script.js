@@ -34,7 +34,6 @@ formContainer.addEventListener("submit", (e) => {
 // adds input eventlistener on inputBAr
 function inputEventLisener() {
   inputBar.addEventListener("input", () => {
-    console.log(inputBar.value);
     clearInterface();
   });
 }
@@ -48,6 +47,7 @@ function clearInterface() {
   loadingMsg.style.display = "none";
 }
 
+// retrives lat and lon address of a location
 async function getLanLon(placeName) {
   const locationinput = placeName;
   try {

@@ -170,7 +170,7 @@ function render(data) {
   weatherData.textContent = weather;
   tempData.textContent = `Temperature : ${temp}°C`;
   humidityData.textContent = `Humidity : ${humidity}%`;
-  countryCodeData.textContent = `countryCode: ${countryCode}`;
+  countryCodeData.textContent = `Country Code: ${countryCode}`;
   weatherStatContainer.style.display = "block";
   inputBar.value = "";
 }

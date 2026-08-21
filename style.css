@@ -20,9 +20,11 @@ body {
 }
 p {
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
   margin-bottom: 5px;
   margin: 0;
+  color: white;
+  letter-spacing: 2px;
 }
 body,
 .full-stat-container {
@@ -49,10 +51,11 @@ body,
   margin-top: 15px;
   margin-bottom: 25px;
   font-size: 40px;
+  color: rgba(255, 255, 255, 0.8);
 }
 .form-container {
   display: grid;
-  grid-template-columns: 1fr 120px;
+  grid-template-columns: 3fr 1.5fr;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -64,40 +67,43 @@ body,
 
 .input-bar {
   border-radius: 4px;
-  border: solid 1px rgb(0, 0, 0);
-  background: rgba(255, 255, 255, 0.2);
-
+  border: solid 1px rgb(248, 247, 248);
+  background-color: rgba(255, 255, 255, 0.2);
   height: 37px;
   padding-left: 10px;
   min-width: 120px;
   font-size: 15px;
-}
-.input-bar:active {
-  outline-width: 1px;
-}
-.place-input::placeholder {
-  color: rgb(161, 160, 160);
+  color: rgba(255, 255, 255, 0.8);
   font-weight: bold;
+}
+.input-bar:focus {
+  border-color: rgb(190, 195, 247);
+  outline: none;
+}
+.input-bar::placeholder {
+  color: rgb(255, 255, 255);
+  font-weight: 300;
 }
 .btn {
   border: none;
   border-radius: 4px;
-  background: #85d2ff;
-  background: linear-gradient(140deg, rgb(75, 117, 141) 0%, rgb(127, 78, 155) 100%);
-  color: rgb(252, 251, 251);
+  background-color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 1px;
+  color: rgba(60, 50, 77, 0.8);
   font-weight: bold;
-  padding: 13px 15px;
+  font-size: 14px;
+  padding: 0px 15px;
+  height: 41px;
   cursor: pointer;
-  transition: background 3s ease;
 }
 .btn:hover {
-  background: #85d2ff;
-  background: linear-gradient(140deg, rgb(44, 78, 97) 0%, rgb(62, 27, 82) 100%);
+  background-color: rgba(60, 50, 77, 0.8);
+  color: rgba(255, 255, 255, 0.8);
 }
 .place-name,
 .error-mesg {
   font-weight: bold;
-  font-size: 22px;
+  font-size: 25px;
 }
 @media (max-width: 530px) {
   .form-container {
@@ -125,7 +131,7 @@ body,
   color: rgb(145, 143, 143);
 }
 .loading-mesg {
-  color: rgba(69, 36, 99, 0.4);
+  color: rgba(255, 255, 255, 0.7);
   font-weight: 600;
   display: none;
   margin-top: 5px;
@@ -139,7 +145,7 @@ body,
 }
 .bar {
   width: 10px;
-  background-color: rgba(61, 59, 59, 0.2);
+  background-color: rgb(238, 238, 238);
   height: 3px;
   border-radius: 5px;
 }

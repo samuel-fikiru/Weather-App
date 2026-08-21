@@ -173,4 +173,5 @@ function render(data) {
   countryCodeData.textContent = `Country Code: ${countryCode}`;
   weatherStatContainer.style.display = "block";
   inputBar.value = "";
+  inputBar.focus();
 }

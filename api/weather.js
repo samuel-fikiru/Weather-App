@@ -1,5 +1,7 @@
 export default {
     fetch(request){
-        return new Response("Weather API is working!")
+        const key= process.env.OPENWEATHER_API_KEY;
+        
+        return new Response(key? "key exists" : "key missing");
     }
 }

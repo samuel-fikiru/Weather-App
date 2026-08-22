@@ -125,7 +125,7 @@ async function getWeatherData(latitude, longitude) {
 
   try {
     //const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
-    const test = await fetch(`/api/weather?lat=6.5&lon=37`);
+    const test = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
     const test2 = await test.json();
     console.log(test2);
 /*

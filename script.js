@@ -135,11 +135,12 @@ async function getWeatherData(latitude, longitude) {
       const data = await response.json();
       renderLoadingMsg();
       render(data);
-    }
-  } catch (error) {
+    }*/ 
+  } 
+ catch (error) {
     renderErrorMsg("request");
   }
-    */
+   
 }
 
 // handles type of error msg to be displayed

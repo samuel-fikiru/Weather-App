@@ -124,11 +124,11 @@ async function getWeatherData(latitude, longitude) {
   const lon = longitude;
 
   try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
+    //const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
     const test = await fetch(`/api/weather?${lat}&lon=${lon}`);
     const test2 = await test.json();
-    console.log(test2.main);
-
+    console.log(test2);
+/*
     if (!response.ok) {
       throw new Error("Request Failed!");
     } else {
@@ -139,6 +139,7 @@ async function getWeatherData(latitude, longitude) {
   } catch (error) {
     renderErrorMsg("request");
   }
+    */
 }
 
 // handles type of error msg to be displayed

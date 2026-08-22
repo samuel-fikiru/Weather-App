@@ -47,7 +47,7 @@ function clearInterface() {
   loadingMsg.style.display = "none";
 }
 
-const apiKey = '9667085e726259341ed94d4ecf653338';
+const apiKey = process.env.OPENWEATHER_API_KEY;
 
 // retrives lat and lon address of a location
 async function getLanLon(placeName) {

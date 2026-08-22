@@ -51,7 +51,7 @@ function clearInterface() {
 async function getLanLon(placeName) {
   const locationinput = placeName;
   try {
-    const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${locationinput}&limit=5&appid=9667085e726259341ed94d4ecf653338`);
+    const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${locationinput}&limit=5&appid=9667085e726259341ed94d4ecf653338`);
     if (!response.ok) {
       throw new Error("Request failed");
     }
@@ -146,6 +146,7 @@ function renderErrorMsg(errorType) {
   }
   loadingMsg.style.display = "none";
   errorMsg.style.display = "block";
+  inputBar.value='';
 }
 
 // handles displaying loading message
@@ -173,5 +174,5 @@ function render(data) {
   countryCodeData.textContent = `Country Code: ${countryCode}`;
   weatherStatContainer.style.display = "block";
   inputBar.value = "";
-  inputBar.focus();
+  inputBar.focus(); 
 }

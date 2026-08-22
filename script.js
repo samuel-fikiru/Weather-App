@@ -16,7 +16,7 @@ const weatherStatContainer = document.querySelector(".js-weather-stat-container"
 let countrySelectionContainer = null;
 let locationName = "";
 
-// getWeatherBtn click listener 
+// getWeatherBtn click listener
 formContainer.addEventListener("submit", (e) => {
   e.preventDefault();
   clearInterface();
@@ -24,12 +24,10 @@ formContainer.addEventListener("submit", (e) => {
   const inputData = inputBar.value.trim();
   if (inputData !== "") {
     getLanLon(inputData);
-    console.log('running');
   } else {
     renderErrorMsg("location");
   }
 });
-
 
 // adds input eventlistener on inputBAr
 function inputEventLisener() {
@@ -47,13 +45,14 @@ function clearInterface() {
   loadingMsg.style.display = "none";
 }
 
-const apiKey = process.env.OPENWEATHER_API_KEY;
+const apiKey = "9667085e726259341ed94d4ecf653338";
 
 // retrives lat and lon address of a location
 async function getLanLon(placeName) {
   const locationinput = placeName;
   try {
     const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${locationinput}&limit=5&appid=${apiKey}`);
+
     if (!response.ok) {
       throw new Error("Request failed");
     }
@@ -126,6 +125,9 @@ async function getWeatherData(latitude, longitude) {
 
   try {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
+    const test = await fetch(`/api/weather?${lat}&lon=${lon}`);
+    console.log(test);
+
     if (!response.ok) {
       throw new Error("Request Failed!");
     } else {
@@ -148,7 +150,7 @@ function renderErrorMsg(errorType) {
   }
   loadingMsg.style.display = "none";
   errorMsg.style.display = "block";
-  inputBar.value='';
+  inputBar.value = "";
 }
 
 // handles displaying loading message
@@ -176,5 +178,5 @@ function render(data) {
   countryCodeData.textContent = `Country Code: ${countryCode}`;
   weatherStatContainer.style.display = "block";
   inputBar.value = "";
-  inputBar.focus(); 
+  inputBar.focus();
 }

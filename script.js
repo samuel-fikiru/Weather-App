@@ -47,11 +47,13 @@ function clearInterface() {
   loadingMsg.style.display = "none";
 }
 
+const apiKey = '9667085e726259341ed94d4ecf653338';
+
 // retrives lat and lon address of a location
 async function getLanLon(placeName) {
   const locationinput = placeName;
   try {
-    const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${locationinput}&limit=5&appid=9667085e726259341ed94d4ecf653338`);
+    const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${locationinput}&limit=5&appid=${apiKey}`);
     if (!response.ok) {
       throw new Error("Request failed");
     }
@@ -123,7 +125,7 @@ async function getWeatherData(latitude, longitude) {
   const lon = longitude;
 
   try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9667085e726259341ed94d4ecf653338&units=metric`);
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
     if (!response.ok) {
       throw new Error("Request Failed!");
     } else {

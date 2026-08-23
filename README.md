@@ -43,14 +43,21 @@ Check out the live version of the app here:
 ---
 
 ## Setup Instructions | Using Your Own API Key
-This project uses the OpenWeather API. To run the project with your own API key:
-Create an account at OpenWeather then You need to obtain an API key from [OpenWeatherMap](https://openweathermap.org/api).
-In your Vercel project, go to Settings → Environment Variables.
-Add the following environment variable:
-OPENWEATHER_API_KEY=your_api_key_here 
-Make sure the variable is enabled for the environment you're deploying to.
-Redeploy the project so the new environment variable is applied.
-The API key is used by the Vercel Functions and is not included in the frontend JavaScript code.
 
+This project utilizes the OpenWeatherMap API. To run the application with your own API key, follow these steps:
+
+1. **Create an account** at [OpenWeatherMap](https://openweathermap.org/api) and obtain your API key.
+
+2. **Configure environment variables in Vercel:**
+   - Navigate to your project’s **Settings** → **Environment Variables**.
+   - Add a new variable:
+     ```
+     OPENWEATHER_API_KEY=your_api_key_here
+     ```
+   - Ensure the variable is enabled for the appropriate environment (e.g., Production, Preview).
+
+3. **Redeploy** your project to apply the new environment variable.
+
+> **Note:** The API key is securely used by Vercel Functions and **not** embedded directly in the frontend JavaScript code.
 
 ---

@@ -7,6 +7,6 @@ export default{
         const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${locationinput}&limit=5&appid=${process.env.OPENWEATHER_API_KEY}`);
         const data = await response.json();
 
-        return data;
+        return Response.json(data);
     }
 }

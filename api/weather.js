@@ -14,3 +14,5 @@ export default {
     return Response.json(data);
   },
 };
+
+// process.env.OPENWEATHER_API_KEY - vercel env variable

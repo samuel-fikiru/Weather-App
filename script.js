@@ -51,7 +51,10 @@ const apiKey = "9667085e726259341ed94d4ecf653338";
 async function getLanLon(placeName) {
   const locationinput = placeName;
   try {
-    const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${locationinput}&limit=5&appid=${apiKey}`);
+    // const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${locationinput}&limit=5&appid=${apiKey}`);
+    const response = await fetch(`/api/geoData?location=${locationinput}`);
+
+    
 
     if (!response.ok) {
       throw new Error("Request failed");

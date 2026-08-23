@@ -52,8 +52,6 @@ async function getLanLon(placeName) {
   try {
     const response = await fetch(`/api/geoData?location=${locationinput}`);
 
-    
-
     if (!response.ok) {
       throw new Error("Request failed");
     }
@@ -142,7 +140,7 @@ async function getWeatherData(latitude, longitude) {
 }
 
 // handles type of error msg to be displayed
-function renderErrorMsg(errorType) {
+export function renderErrorMsg(errorType) {
   if (errorType === "location") {
     errorMsg.innerHTML = `
     Invalid Location,<br> <span class="request-text">please type valid location</span>`;
